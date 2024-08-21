@@ -5,13 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ai.dify</groupId>
-    <artifactId>java-client</artifactId>
-    <version>1.0.0</version>
+    <artifactId>dify-java-client</artifactId>
+    <version>1.1.0</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	    <sonatype.nexus.url>http://192.168.14.111:8082</sonatype.nexus.url>
     </properties>
     <dependencies>
         <dependency>
@@ -39,5 +40,47 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+	
+	<build>
+		<finalName>dify-java-client</finalName>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-maven-plugin</artifactId>
+				<version>6.3.0.Final</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+	
+	</build>
+	
+	<!-- nexus 上传配置 -->
+	<distributionManagement>
+		<!-- release 仓库-->
+		<repository>
+			<id>nexus-releases</id>
+			<name>nexus-releases</name>
+			<url>${sonatype.nexus.url}/repository/maven-releases/</url>
+		</repository>
+		
+		<!-- snapshot 仓库-->
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>nexus-snapshots</name>
+			<url>${sonatype.nexus.url}/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
